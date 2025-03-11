@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Metadata -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page Title -->
     <title>Search Watchlist</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <form id="movie-search-form" class="search-search-form">
+    <!-- Header with background image -->
+    <header class="header container">
+      <h1>Find your film</h1>
+      <a href="./myWatchlist.html" class="watchlist-link">My Watchlist</a>
+    </header>
+
+    <!-- Search form -->
+    <form id="movie-search-form" class="search-form container">
       <input
         type="text"
         id="movie-search-input"
@@ -15,8 +28,14 @@
       />
       <button id="movie-search-button" type="submit">Search</button>
     </form>
-    <h2 id="search-results-title"></h2>
-    <div id="search-results-container"></div>
+
+    <!-- Search Results -->
+    <section
+      id="search-results-container"
+      class="search-results-container container"
+    ></section>
+
+    <!-- Javascript -->
     <script src="/scripts/index.js" type="module"></script>
   </body>
 </html>
