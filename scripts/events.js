@@ -1,6 +1,6 @@
 // Events.js
 import { handleFetchSearchTerm, fetchMovieDetails } from "./api.js";
-import { displayMovies  } from "./dom.js";
+import { displayMovies, displayWatchlist  } from "./dom.js";
 
 /**
  * Handles the movies search form submission
@@ -11,7 +11,6 @@ async function handleMovieSearchFormSubmit(event) {
 
     const searchQuery = document.getElementById('movie-search-input').value.trim()
 
-    // TODO: `Display console error in the DOM`
     if (!searchQuery) {
         console.error("No search query entered");
         return;
@@ -32,6 +31,41 @@ async function handleMovieSearchFormSubmit(event) {
     displayMovies(detailedMovies)
 }
 
+function handleWatchlistAction(event) {
+    const dataset = event.target.dataset
+    const action = dataset.action
+    const movieId = dataset.id
+
+    if(!action || !movieId) return 
+
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []
+
+    if(action === "add") {
+        const movieData = {
+            id: movieId,
+            title: dataset.title,
+            poster: dataset.poster,
+            imdbRating: dataset.imdb,
+            runtime: dataset.runtime,
+            genre: dataset.genre,
+            description: dataset.description
+        }
+
+        if(!watchlist.some(movie => movie.id === movieData.id)) {
+            watchlist.push(movieData)
+            localStorage.setItem('watchlist', JSON.stringify(watchlist))
+            console.log("Added to watchlist", movieData)
+        }
+    }
+    else if (action === "remove") {
+        watchlist = watchlist.filter(movie => movie.id !== movieId)
+        localStorage.setItem("watchlist", JSON.stringify(watchlist))
+        console.log("Removed from watchlist:", movieId)
+
+        displayWatchlist()
+    }
+}
+
 /**
  * Initalise event listeners
  */
@@ -44,6 +78,8 @@ function initializeEventListeners() {
     } else {
         console.error("Error: movieSearchForm not found")
     }
+
+    document.addEventListener('click', handleWatchlistAction);
 }
 
 export { initializeEventListeners }

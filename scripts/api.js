@@ -19,6 +19,7 @@ async function handleFetchSearchTerm(searchQuery) {
             return data.Search
         } else {
             console.warn("No results found:", data.Error)
+            document.getElementById('search-results-container').innerHTML = `<p class="search-results-placeholder">Unable to find what you're looking for. Please try another search</p>`
             return []
         }
 
@@ -40,6 +41,7 @@ async function fetchMovieDetails(imdbID) {
         const data = await response.json()
 
         if(data.Response === "True") {
+            console.log('fetchMovieDetails', data)
             return data
         } else {
             console.warn("Error fetching movie details: ", data.Error)

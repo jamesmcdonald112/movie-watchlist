@@ -10,12 +10,20 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
   </head>
-  <body>
+  <body class="max-container">
     <!-- Header with background image -->
-    <header class="header container">
-      <h1>Find your film</h1>
-      <a href="./myWatchlist.html" class="watchlist-link">My Watchlist</a>
+    <header class="header">
+      <div class="header-content container">
+        <h1>Find your film</h1>
+        <a href="./myWatchlist.html" class="watchlist-link">My Watchlist</a>
+      </div>
     </header>
 
     <!-- Search form -->
@@ -25,15 +33,27 @@
         id="movie-search-input"
         aria-label="Movie search"
         placeholder="Enter movie title..."
+        class="movie-search-input"
       />
-      <button id="movie-search-button" type="submit">Search</button>
+      <button
+        class="movie-search-button"
+        id="movie-search-button"
+        type="submit"
+      >
+        Search
+      </button>
     </form>
 
     <!-- Search Results -->
     <section
       id="search-results-container"
       class="search-results-container container"
-    ></section>
+    >
+      <i class="fa fa-film"></i>
+      <p class="search-results-placeholder" id="search-results-placeholder">
+        Start Exploring
+      </p>
+    </section>
 
     <!-- Javascript -->
     <script src="/scripts/index.js" type="module"></script>
