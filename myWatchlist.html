@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
     <title>My Watchlist</title>
-</head>
-<body>
-    
-</body>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body class="max-container">
+    <!-- Header with background image -->
+    <header class="header">
+      <div class="header-content container">
+        <h1>My Watchlist</h1>
+        <a href="./index.html" class="watchlist-link">Search for movies</a>
+      </div>
+    </header>
+
+    <!-- Watchlist -->
+    <section class="watchlist-container" id="watchlist-container"></section>
+
+    <!-- Javascript -->
+    <script src="/scripts/watchlist.js" type="module"></script>
+  </body>
 </html>

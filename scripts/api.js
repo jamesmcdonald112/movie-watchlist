@@ -13,13 +13,23 @@ async function handleFetchSearchTerm(searchQuery) {
     try {
         const response = await fetch(url)
         const data = await response.json()
+        const resultsContainer = document.getElementById('search-results-container');
+
 
         if(data.Response === "True") {
             console.log("Fetched movies:", data.Search)
             return data.Search
         } else {
             console.warn("No results found:", data.Error)
-            document.getElementById('search-results-container').innerHTML = `<p class="search-results-placeholder">Unable to find what you're looking for. Please try another search</p>`
+             
+            // Ensure the container exists before updating innerHTML
+             if (resultsContainer) {
+                resultsContainer.innerHTML = `<p class="search-results-container">No results found for "${searchQuery}". Please try another search.</p>`;
+
+            } else {
+                console.error("Element with ID 'search-results-container' not found.");
+            }
+
             return []
         }
 

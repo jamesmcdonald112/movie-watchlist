@@ -20,7 +20,6 @@ async function handleMovieSearchFormSubmit(event) {
     const movies = await handleFetchSearchTerm(searchQuery)
 
     if(movies.length === 0) {
-        displayMovies([])
         return
     }
 
@@ -32,37 +31,28 @@ async function handleMovieSearchFormSubmit(event) {
 }
 
 function handleWatchlistAction(event) {
-    const dataset = event.target.dataset
-    const action = dataset.action
-    const movieId = dataset.id
+    const { action, id, title, poster, imdb, runtime, genre, description } = event.target.dataset;
 
-    if(!action || !movieId) return 
+    if (!action || !id) return;
 
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []
+    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-    if(action === "add") {
-        const movieData = {
-            id: movieId,
-            title: dataset.title,
-            poster: dataset.poster,
-            imdbRating: dataset.imdb,
-            runtime: dataset.runtime,
-            genre: dataset.genre,
-            description: dataset.description
+    if (action === "add") {
+        const movieData = { id, title, poster, imdbRating: imdb, runtime, genre, description };
+
+        if (!watchlist.some(movie => movie.id === id)) {
+            watchlist.push(movieData);
+            localStorage.setItem("watchlist", JSON.stringify(watchlist));
+            console.log("Added to watchlist", movieData);
         }
-
-        if(!watchlist.some(movie => movie.id === movieData.id)) {
-            watchlist.push(movieData)
-            localStorage.setItem('watchlist', JSON.stringify(watchlist))
-            console.log("Added to watchlist", movieData)
-        }
-    }
+    } 
     else if (action === "remove") {
-        watchlist = watchlist.filter(movie => movie.id !== movieId)
-        localStorage.setItem("watchlist", JSON.stringify(watchlist))
-        console.log("Removed from watchlist:", movieId)
+        watchlist = watchlist.filter(movie => movie.id !== id);
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+        console.log("Removed from watchlist:", id);
 
-        displayWatchlist()
+        // Ensure the UI updates immediately
+        displayWatchlist();
     }
 }
 
